@@ -115,4 +115,28 @@ http://127.0.0.1:8000/
 
 <p>¡Enhorabuena! Has iniciado con un servidor web. Ahora estás listo para empezar a crear contenido para tu proyecto.</p>
 
+<h2>Creamos la aplicación</h2>
+
+<p>Para crear la aplicación</p>
+
+``` bash
+python manage.py startapp task
+```
+
+<p>Después registraríamos nuestra aplicación recien hecha en <code>mysite/settings.py</code></p>
+
+``` bash
+      INSTALLED_APPS = [
+            'django.contrib.admin',
+            'django.contrib.auth',
+            'django.contrib.contenttypes',
+            'django.contrib.sessions',
+            'django.contrib.messages',
+            'django.contrib.staticfiles',
+            'blog',
+]
+```
+
+
+
 
