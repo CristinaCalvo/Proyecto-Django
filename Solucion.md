@@ -54,6 +54,19 @@ django-admin startproject mysite .
 ``` bash
 touch .gitignore
 ```
+
+<p>Lo que contendría .gitignore</p>
+
+``` bash
+*.pyc
+*~
+__pycache__
+myvenv
+db.sqlite3
+/static
+.DS_Store
+```
+
 <p>Recuerda que este archivo está oculto, si quieres verlo tienes que hacerlo con <code>ls -la</code></p>
 
 <p>A continuación editamos los datos básicos en <code>mysite/settings.py</code></p>
@@ -133,10 +146,161 @@ python manage.py startapp task
             'django.contrib.sessions',
             'django.contrib.messages',
             'django.contrib.staticfiles',
-            'blog',
+            'task',
+]
+```
+<h2>Creamos modelo</h2>
+<p>Definimos el modelo Task en el archivo <code>blog/models.py</code>. Este modelo tiene propiedades como título, texto, autor, una casilla para marcar que está hecho, fechas y un método publicar.</p>
+
+
+``` bash
+from django.db import models
+from django.conf import settings
+from django.utils import timezone
+
+class Task(models.Model):
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    title = models.CharField(max_length=200)
+    text = models.TextField()
+    validacion = models.BooleanField()
+    created_date = models.DateTimeField(default=timezone.now)
+    published_date = models.DateTimeField(blank=True, null=True)
+
+def publish(self):
+    self.published_date = timezone.now()
+    self.save()
+
+def __str__(self):
+    return self.title
+```
+
+<p>Luego, creamos un archivo de migración y aplicamos la migración para agregar el modelo Task a la base de datos SQLite que utilizamos. </p>
+
+<p>Preparamos un fichero de migración</p>
+
+``` bash
+python manage.py makemigrations task
+```
+
+<p>Aplicamos un fichero de migración</p>
+
+``` bash
+python manage.py migrate task
+```
+
+<h2>Aministrador de Django</h2>
+<p>Con el administrador de Django podremos editar y publicar nuestras Tasks</p>
+<p>Abre el archivo <code>task/admin.py</code> en tu editor y reemplaza su contenido con el siguiente código:</p>
+
+``` bash
+from django.contrib import admin
+from .models import Task
+
+admin.site.register(Task)
+```
+
+<p>En este código, estamos importando el modelo Task que definimos anteriormente y lo registramos con el administrador mediante <code>admin.site.register(Task)</code>.</p>
+
+<p>Creamos un administrador desde la carpeta principal</p>
+
+``` bash
+python manage.py createsuperuser
+```
+
+<p>Recuerda iniciar el servidor web para ver los cambios</p>
+
+``` bash
+python manage.py runserver
+```
+<p>En el navegador:</p>
+
+``` bash
+http://127.0.0.1:8000/admin/
+```
+
+<h2>URL de Task</h2>
+<p>Modificamos <code>mysite/urls.py</code> y añadimos la importación de task.urls</p>
+
+``` bash
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('task.urls')),
 ]
 ```
 
+<p>Luego, en un nuevo archivo llamado <code>task/urls.py</code>, definimos las URLs específicas de la aplicación de task:</p>
 
+``` bash
+from django.urls import path
+from . import views
 
+urlpatterns = [
+	path('', views.task_list, name='task_list'),
+]
+```
+
+<h2>Vistas de Task</h2>
+
+<p>Si has intentado iniciar el servidor y te da error es por que primero tenemos que configurar la vista de Task</p>
+<p>Abre el archivo <code>task/views.py</code> y agrega esta vista</p>
+
+``` bash
+from django.shortcuts import render
+from django.utils import timezone
+from .models import Task
+
+      def task_list(request):
+      tasks = Task.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+      return render(request, 'task/task_list.html', {'tasks': tasks})
+```
+
+<p>Hemos creado una vista llamada task_list que utiliza la función render para construir la plantilla task/task_list.html.
+
+Guarda el archivo y visita http://127.0.0.1:8000/ para ver el resultado.
+
+Si encuentras un error, no te preocupes. A continuación vamos a crear plantillas.</p>
+
+<h2>Nuestra plantilla html</h2>
+<p>Crea un archivo llamado task_list.html en el directorio <code>task/templates/task</code>.</p>
+
+<p>Dentro de la carpeta task</p>
+
+``` bash
+mkdir templates
+```
+
+<p>Dentro de la carpeta task/templates</p>
+
+``` bash
+mkdir task
+```
+
+<p>Dentro de la carpeta task/templates/task</p>
+
+``` bash
+touch task_list.html
+```
+
+<p>Por último en <code>task_list.html</code></p>
+
+``` bash
+<div>
+    <h1><a href="/">Tareas</a></h1> 
+</div>
+    {% for task in tasks %}
+    <div>
+        <p> publicado: {{ task.published_date }}</p>
+        <h2><a href="">{{ task.title }}</a></h2>
+        <p>{{task.text|linebreaksbr}}</p> 
+        <p>Estado: {{task.validacion}}</p>
+    </div>
+    {% endfor %}
+```
+
+<p>Ahora cuando iniciemos el servidor deberiámos ver como todo sale correctamente</p>
+
+<p>Gracias por ver :)</p>
 
