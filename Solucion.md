@@ -18,6 +18,11 @@ source /usr/local/bin/virtualenvwrapper.sh
 mkvirtualenv django
 ```
 <p>Una vez que hayas creado el entorno virtual, verás que tu terminal muestra el prefijo del entorno virtual (django).</p>
+<p>Si ya lo tienes creado de antes o quieres reutilizar uno</p>
+
+``` bash
+workon nombre
+```
 
 <h2>Instalación de Django</h2>
 <p>Con el entorno virtual activado, estás listo para instalar Django. Antes de hacerlo, asegúrate de tener la última versión de pip ejecutando el siguiente comando:</p>
