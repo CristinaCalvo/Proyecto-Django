@@ -1,0 +1,11 @@
+<div>
+    <h1><a href="/">Tareas</a></h1> 
+</div>
+    {% for task in tasks %}
+    <div>
+        <p> publicado: {{ task.published_date }}</p>
+        <h2><a href="">{{ task.title }}</a></h2>
+        <p>{{task.text|linebreaksbr}}</p> 
+        <p>Estado: {{task.validacion}}</p>
+    </div>
+    {% endfor %}
