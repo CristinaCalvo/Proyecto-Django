@@ -79,10 +79,10 @@ db.sqlite3
 <p>Edita <code>LANGUAGE_CODE</code> y <code>TIME_ZONE</code></p>
 
 ``` bash
-LANGUAGE_CODE = ‘es-es’
+LANGUAGE_CODE = 'es-es'
 ```
 ``` bash
-TIME_ZONE = ‘Europe/Madrid’
+TIME_ZONE = 'Europe/Madrid'
 ```
 
 <p>Comprueba que esta <code>STATIC_URL</code> correctamente</p>
