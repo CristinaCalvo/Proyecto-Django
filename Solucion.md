@@ -155,7 +155,7 @@ python manage.py startapp task
 ]
 ```
 <h2>Creamos modelo</h2>
-<p>Definimos el modelo Task en el archivo <code>blog/models.py</code>. Este modelo tiene propiedades como título, texto, autor, una casilla para marcar que está hecho, fechas y un método publicar.</p>
+<p>Definimos el modelo Task en el archivo <code>task/models.py</code>. Este modelo tiene propiedades como título, texto, autor, una casilla para marcar que está hecho, fechas y un método publicar.</p>
 
 
 ``` bash
