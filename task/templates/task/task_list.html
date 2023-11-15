@@ -1,11 +1,18 @@
-<div>
-    <h1><a href="/">Tareas</a></h1> 
-</div>
+<html>
+    <body>
+
+    <h1><a href="/">Lista de Tareas</a></h1> 
     {% for task in tasks %}
-    <div>
-        <p> publicado: {{ task.published_date }}</p>
-        <h2><a href="">{{ task.title }}</a></h2>
-        <p>{{task.text|linebreaksbr}}</p> 
-        <p>Estado: {{task.validacion}}</p>
+    <div>  
+        <h2><a href="{% url 'detalles' pk=task.pk %}">{{ task.title }}</a></h2>
+        <!--<p>{{task.text|linebreaksbr}}</p> 
+        <p>Hecho: {{task.validacion}}</p>
+        <p>publicado: {{ task.published_date }}</p>-->
+
     </div>
     {% endfor %}
+ <div>
+    <a href="{% url 'nueva_task' %}">Agregar nueva tearea</a>
+</div>
+</body>
+</html>

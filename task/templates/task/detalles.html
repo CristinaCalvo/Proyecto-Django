@@ -1,0 +1,18 @@
+<html>
+    <body>
+
+    <h1><a>Detalles</a></h1> 
+    
+    <div>  
+        <h2><a>{{tasks.title}}</a></h2>
+        <p>Descripción: {{tasks.text|linebreaksbr}}</p> 
+        <p>Hecho: {{tasks.validacion}}</p>
+        <!--<p>Publicado: {{tasks.published_date}}</p>-->
+
+    </div>
+  
+ <div>
+    <a href="{% url 'task_list' %}">Lista de tareas</a>
+</div>
+</body>
+</html>
