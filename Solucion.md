@@ -18,6 +18,11 @@ source /usr/local/bin/virtualenvwrapper.sh
 mkvirtualenv django
 ```
 <p>Una vez que hayas creado el entorno virtual, verás que tu terminal muestra el prefijo del entorno virtual (django).</p>
+<p>Si ya lo tienes creado de antes o quieres reutilizar uno</p>
+
+``` bash
+workon nombre
+```
 
 <h2>Instalación de Django</h2>
 <p>Con el entorno virtual activado, estás listo para instalar Django. Antes de hacerlo, asegúrate de tener la última versión de pip ejecutando el siguiente comando:</p>
@@ -74,10 +79,10 @@ db.sqlite3
 <p>Edita <code>LANGUAGE_CODE</code> y <code>TIME_ZONE</code></p>
 
 ``` bash
-LANGUAGE_CODE = ‘es-es’
+LANGUAGE_CODE = 'es-es'
 ```
 ``` bash
-TIME_ZONE = ‘Europe/Madrid’
+TIME_ZONE = 'Europe/Madrid'
 ```
 
 <p>Comprueba que esta <code>STATIC_URL</code> correctamente</p>
@@ -150,7 +155,7 @@ python manage.py startapp task
 ]
 ```
 <h2>Creamos modelo</h2>
-<p>Definimos el modelo Task en el archivo <code>blog/models.py</code>. Este modelo tiene propiedades como título, texto, autor, una casilla para marcar que está hecho, fechas y un método publicar.</p>
+<p>Definimos el modelo Task en el archivo <code>task/models.py</code>. Este modelo tiene propiedades como título, texto, autor, una casilla para marcar que está hecho, fechas y un método publicar.</p>
 
 
 ``` bash
